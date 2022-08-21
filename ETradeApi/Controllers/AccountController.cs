@@ -2,7 +2,7 @@
 using Business.Interfaces;
 using Core.Utilities.Security;
 using Entities.Concrete;
-using Entities.DTOs;
+using Entities.DTOs.AuthDTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
