@@ -1,16 +1,14 @@
-﻿using Core.Entities.Abstract;
+﻿using Core.Entities.Interfaces;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
     [Table("Payments")]
     public class Payment : IEntity
     {
+        [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal TotalPrice { get; set; }
@@ -21,7 +19,9 @@ namespace Entities.Concrete
         public string TransactionId { get; set; }
         public int CartID { get; set; }
         public int AccountID { get; set; }
+        [ForeignKey("CardId")]
         public virtual Cart Cart { get; set; }
+        [ForeignKey("AccountID")]
         public virtual Account Account { get; set; }
     }
 }

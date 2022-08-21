@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Entities.Abstract
+namespace Core.Entities.Interfaces
 {
     public interface IEntity
     {
