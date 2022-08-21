@@ -20,6 +20,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Core.Repository;
+using Core.Repository.EntityFramework;
 
 namespace ETradeApi
 {
@@ -63,7 +65,12 @@ namespace ETradeApi
             });
             services.AddTransient<DatabaseContext>();
             services.AddScoped<IAccountService, AccountManager>();
+            services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IAccountDal, AccountDal>();
+            services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped(typeof(IBaseRepository<>), typeof(EfBaseRepository<,>));
+            services.AddScoped(typeof(IBaseService<>), typeof(BaseManager<>));
+            services.AddScoped<ICategoryDal, CategoryDal>();
             
         }
 
