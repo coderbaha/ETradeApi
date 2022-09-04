@@ -22,14 +22,14 @@ namespace Core.Repository.EntityFramework
             _context = context;
         }
 
-        public async Task<IResult> AddAsync(TEntity entity)
+        public virtual async Task<IDataResult<TEntity>> AddAsync(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 await context.SaveChangesAsync();
-                return new SuccessResult(Messages.Added(typeof(TEntity).Name));
+                return new SuccessDataResult<TEntity>(entity,Messages.Added(typeof(TEntity).Name));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Core.Repository.EntityFramework
             }
         }
 
-        public async Task<IDataResult<List<TEntity>>> GetAllAsync(bool includeRelationShips = false, Expression<Func<TEntity, bool>> filter = null)
+        public virtual async Task<IDataResult<List<TEntity>>> GetAllAsync(bool includeRelationShips = false, Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
@@ -90,14 +90,14 @@ namespace Core.Repository.EntityFramework
             }
         }
 
-        public async Task<IResult> UpdateAsync(TEntity entity)
+        public async Task<IDataResult<TEntity>> UpdateAsync(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return new SuccessResult(Messages.Updated(typeof(TEntity).Name));
+                return new SuccessDataResult<TEntity>(entity,Messages.Updated(typeof(TEntity).Name));
             }
         }
     }

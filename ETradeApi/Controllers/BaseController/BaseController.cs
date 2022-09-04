@@ -20,7 +20,7 @@ namespace ETradeApi.Controllers.BaseController
             _mapper = mapper;
         }
         [HttpPost("AddAsync")]
-        public IActionResult AddAsync([FromBody] TMapAdd mapModel)
+        public virtual IActionResult AddAsync([FromBody] TMapAdd mapModel)
         {
             if (ModelState.IsValid)
             {
@@ -32,7 +32,7 @@ namespace ETradeApi.Controllers.BaseController
             return BadRequest(ModelState);
         }
         [HttpGet("GetAllAsync")]
-        public IActionResult GetList()
+        public virtual IActionResult GetList()
         {
             var list = _baseService.GetAllAsync().Result;
             if (list.Data.Count == 0)
@@ -42,7 +42,7 @@ namespace ETradeApi.Controllers.BaseController
             return Ok(list);
         }
         [HttpGet("GetByIdAsync")]
-        public IActionResult GetByIdAsync(int id)
+        public virtual IActionResult GetByIdAsync(int id)
         {
             var response = _baseService.GetByIdAsync(id).Result;
             if (response.Data == null)
@@ -52,14 +52,14 @@ namespace ETradeApi.Controllers.BaseController
             return Ok(response);
         }
         [HttpPut("UpdateAsync")]
-        public IActionResult Update([FromBody] TMapUpdate mapModel)
+        public virtual IActionResult UpdateAsync([FromBody] TMapUpdate mapModel)
         {
             var model = _mapper.Map<T>(mapModel);
             var response = _baseService.UpdateAsync(model).Result;
             return Ok(response);
         }
         [HttpDelete("DeleteAsync")]
-        public IActionResult DeleteAsync(int id)
+        public virtual IActionResult DeleteAsync(int id)
         {
             var response = _baseService.DeleteAsync(id).Result;
             return Ok(response);

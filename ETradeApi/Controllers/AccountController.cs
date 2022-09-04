@@ -3,10 +3,12 @@ using Business.Interfaces;
 using Core.Utilities.Security;
 using Entities.Concrete;
 using Entities.DTOs.AuthDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Claims;
 
@@ -14,6 +16,7 @@ namespace ETradeApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles = "Admin")]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -54,6 +57,7 @@ namespace ETradeApi.Controllers
             return BadRequest(ModelState);
         }
         [HttpPost("Login")]
+        [AllowAnonymous]
         public IActionResult Login([FromBody] LoginDto registerModel)
         {
             if (ModelState.IsValid)

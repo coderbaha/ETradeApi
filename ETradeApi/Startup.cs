@@ -66,11 +66,12 @@ namespace ETradeApi
             services.AddTransient<DatabaseContext>();
             services.AddScoped<IAccountService, AccountManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IAccountDal, AccountDal>();
             services.AddScoped<ICategoryDal, CategoryDal>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(EfBaseRepository<,>));
             services.AddScoped(typeof(IBaseService<>), typeof(BaseManager<>));
-            services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped<IProductDal, ProductDal>();
             
         }
 
