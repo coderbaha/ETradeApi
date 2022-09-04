@@ -9,8 +9,8 @@ namespace Core.Repository
 {
     public interface IBaseRepository<T> where T : class,IEntity, new()
     {
-        Task<IResult> AddAsync(T entity);
-        Task<IResult> UpdateAsync(T entity);
+        Task<IDataResult<T>> AddAsync(T entity);
+        Task<IDataResult<T>> UpdateAsync(T entity);
         Task<IDataResult<T>> GetByIdAsync(Expression<Func<T, bool>> filter, bool includeRelationShips = false);
         Task<IDataResult<List<T>>> GetAllAsync(bool includeRelationShips = false, Expression<Func<T, bool>> filter = null);
         Task<IResult> DeleteAsync(Expression<Func<T, bool>> filter);
